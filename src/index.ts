@@ -1,4 +1,4 @@
-import fs, { promises as promiseFs } from 'fs'
+import fs from 'fs'
 
 import path from 'path'
 
@@ -15,13 +15,23 @@ async function readFiles(
             const isFolder = fs.lstatSync(path.resolve(dir, filePath)).isDirectory()
             if (isFolder) {
                 await readFiles(path.resolve(dir, filePath), originFileName, targetFileName, alsoReplaceExistFile)
-                // 是否存在被拷贝的文件 && (是否要忽略已存在的文件 || 要生成的文件是否已存在(存在就不会覆盖)
+                // if the file you want to copy exist
+                // &&  (if ingnore the existing file || if the file exist, don't cover it)
             } else if (
                 new RegExp(originFileName).test(filePath.toString()) &&
                 (alsoReplaceExistFile || !fs.existsSync(path.resolve(dir, targetFileName)))
             ) {
-                const content = await promiseFs.readFile(path.resolve(dir, filePath), 'utf8')
-                await promiseFs.writeFile(`${dir}/${targetFileName}`, content)
+                fs.readFile(path.resolve(dir, filePath), 'utf8', (err, content) => {
+                    if (err) {
+                        throw err
+                    }
+                    // tslint:disable-next-line: no-shadowed-variable
+                    fs.writeFile(`${dir}/${targetFileName}`, content, err => {
+                        if (err) {
+                            throw err
+                        }
+                    })
+                })
             }
         }),
     )
