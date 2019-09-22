@@ -1,11 +1,22 @@
 {
   "name": "bulk-copy",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "A files bulk copy lib",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
+  "author": "Aermin Huang <aermin@qq.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aermin/bulk-copy.git"
+  },
+  "license": "MIT",
+  "keywords": [
+    "bulk",
+    "copy",
+    "bulk copy",
+    "bulk copy file"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "tsc -w",
     "build": "tsc",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
@@ -18,9 +29,6 @@
     "version": "npm run format && git add -A src",
     "postversion": "git push && git push --tags"
   },
-  "keywords": [],
-  "author": "",
-  "license": "MIT",
   "devDependencies": {
     "@commitlint/cli": "^8.1.0",
     "@commitlint/config-conventional": "^8.1.0",
