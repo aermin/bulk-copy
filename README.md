@@ -1,15 +1,15 @@
-# A files bulk copy lib
+# A files bulk curd lib
 
 ## usage example
 
-npm install bulk-copy --save-dev
-
-`with gulp:`
+> npm install bulk-curd-files --save-dev
 
 ```js
-import { readFiles } from 'bulk-copy';
+import { bulkCopy, bulkDelete } from 'bulk-curd-files';
 
-gulp.task('copy-fileA-as-fileB', async () => {
-await readFiles(path.resolve(\_\_dirname, ''), 'fileA.ts', 'fileB.ts');
-});
+//create fileB by copying fileA in bulk
+bulkCopy(path.resolve(__dirname, './'), 'fileA.ts', 'fileB.ts');
+
+//delete fileA exclude node_modules folder in bulk
+bulkDelete('./', 'fileA.ts', 'node_modules');
 ```

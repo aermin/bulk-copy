@@ -1,20 +1,20 @@
 {
-  "name": "bulk-copy",
-  "version": "0.0.1",
-  "description": "A files bulk copy lib",
+  "name": "bulk-curd-files",
+  "version": "0.0.2",
+  "description": "A files bulk curd lib",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "author": "Aermin Huang <aermin@qq.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/aermin/bulk-copy.git"
+    "url": "https://github.com/aermin/bulk-curd-files.git"
   },
   "license": "MIT",
   "keywords": [
     "bulk",
-    "copy",
-    "bulk copy",
-    "bulk copy file"
+    "curd",
+    "bulk curd",
+    "bulk curd files"
   ],
   "scripts": {
     "start": "tsc -w",
