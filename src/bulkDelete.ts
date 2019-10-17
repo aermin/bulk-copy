@@ -1,19 +1,23 @@
-import fs from 'fs'
-import path from 'path'
-import useFsByAsync from './utils/useFsByAsync'
+import * as fs from 'fs'
+import * as path from 'path'
+import util from 'util'
+
+const unlink = util.promisify(fs.unlink)
+const readdir = util.promisify(fs.readdir)
+const lstat = util.promisify(fs.lstat)
 
 export default async function bulkDelete(dir: string, targetFileName: string, ignoreFolder?: string) {
-    const files = fs.readdirSync(dir)
+    const files = await readdir(dir)
     await Promise.all(
         files.map(async filePath => {
             // if this is a folder, Recursive call it to handle the files from this folder;
             const fileOrFolderPath = path.resolve(dir, filePath)
-            const isFolder = fs.lstatSync(fileOrFolderPath).isDirectory()
+            const isFolder = (await lstat(fileOrFolderPath)).isDirectory()
             if (isFolder && ignoreFolder !== fileOrFolderPath.toString()) {
                 await bulkDelete(fileOrFolderPath, targetFileName, ignoreFolder)
                 // if the file you want to delete exist
             } else if (new RegExp(targetFileName).test(filePath.toString())) {
-                await useFsByAsync('unlink', path.resolve(dir, filePath))
+                await unlink(path.resolve(dir, filePath))
             }
         }),
     )

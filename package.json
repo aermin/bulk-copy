@@ -1,6 +1,6 @@
 {
   "name": "bulk-curd-files",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "A files bulk curd lib",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -31,6 +31,7 @@
   },
   "devDependencies": {
     "@types/jest": "^24.0.18",
+    "babel-node": "0.0.1-security",
     "commitizen": "^4.0.3",
     "cz-conventional-changelog": "^3.0.2",
     "husky": "^3.0.4",
